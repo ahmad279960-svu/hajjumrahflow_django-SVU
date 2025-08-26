@@ -1,0 +1,39 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Profitability Report" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">{% trans "Profitability Report" %}</h1>
+  <a href="{% url 'reports:dashboard' %}" class="btn btn-sm btn-outline-secondary">{% trans "Back to Reports" %}</a>
+</div>
+
+{% if report_data %}
+<div class="card">
+    <div class="card-header">
+        <h4>{{ report_data.trip_name }}</h4>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {% trans "Total Revenue (Collected)" %}
+                <span class="badge bg-success rounded-pill fs-6">{{ report_data.total_revenue|floatformat:2 }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {% trans "Total Expenses" %}
+                <span class="badge bg-danger rounded-pill fs-6">{{ report_data.total_expenses|floatformat:2 }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>{% trans "Net Profit" %}</strong>
+                <strong class="badge bg-primary rounded-pill fs-6">{{ report_data.net_profit|floatformat:2 }}</strong>
+            </li>
+        </ul>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-warning">
+    {% trans "Please select a trip from the reports dashboard to view its profitability." %}
+</div>
+{% endif %}
+{% endblock %}{% endraw %}

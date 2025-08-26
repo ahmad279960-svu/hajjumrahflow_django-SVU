@@ -1,0 +1,97 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ trip.name }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">{{ trip.name }}</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <a href="{% url 'trips:trip-update' trip.pk %}" class="btn btn-sm btn-outline-secondary">
+      <i class="fas fa-edit"></i> {% trans "Edit Trip" %}
+    </a>
+  </div>
+</div>
+
+<h3 class="h4">{% trans "Financial Summary" %}</h3>
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title">{% trans "Total Collected" %}</h5>
+                <p class="card-text fs-4">{{ financial_summary.total_collected|floatformat:2 }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-danger">
+            <div class="card-body">
+                <h5 class="card-title">{% trans "Total Expenses" %}</h5>
+                <p class="card-text fs-4">{{ financial_summary.total_expenses|floatformat:2 }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">{% trans "Net Profit" %}</h5>
+                <p class="card-text fs-4">{{ financial_summary.net_profit|floatformat:2 }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">{% trans "Expected Revenue" %}</h5>
+                <p class="card-text fs-4">{{ financial_summary.expected_revenue|floatformat:2 }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">{% trans "Registered Travelers" %} ({{ trip.booked_seats }} / {{ trip.total_seats }})</div>
+  <div class="card-body">
+    {% if registered_travelers %}
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Passport #" %}</th><th>{% trans "Booking Status" %}</th></tr></thead>
+                <tbody>
+                {% for booking in registered_travelers %}
+                <tr>
+                    <td>{{ booking.customer.full_name }}</td>
+                    <td>{{ booking.customer.passport_number }}</td>
+                    <td><span class="badge bg-info">{{ booking.get_status_display }}</span></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted"><em>{% trans "No travelers have been booked on this trip yet." %}</em></p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">{% trans "Trip Expenses" %}</div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead><tr><th>{% trans "Date" %}</th><th>{% trans "Description" %}</th><th class="text-end">{% trans "Amount" %}</th></tr></thead>
+        <tbody>
+          {% for expense in trip.expenses.all %}
+          <tr>
+            <td>{{ expense.expense_date|date:"Y-m-d" }}</td>
+            <td>{{ expense.description }}</td>
+            <td class="text-end">{{ expense.amount|floatformat:2 }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="3" class="text-center">{% trans "No expenses recorded for this trip yet." %}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}{% endraw %}

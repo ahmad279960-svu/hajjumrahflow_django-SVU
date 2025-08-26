@@ -1,0 +1,20 @@
+{% raw %}{% load static i18n %}
+<div class="modal fade" id="svuInfoModal" tabindex="-1" aria-labelledby="svuInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="svuInfoModalLabel">
+                    <img src="{% static 'images/SVU-logo.png' %}" alt="SVU Logo" height="40" class="me-2">
+                    {% trans "Project Information" %}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="lead">Integrated Web-Based System for Hajj and Umrah Trips Management</p>
+                <hr>
+                <p><strong>MCS Program - Syrian Virtual University</strong></p>
+                <p>Ahmad Shamdeen (ID: Ahmad_279960)</p>
+            </div>
+        </div>
+    </div>
+</div>{% endraw %}

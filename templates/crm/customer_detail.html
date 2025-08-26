@@ -1,0 +1,88 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ customer.full_name }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">{% trans "Customer Profile" %}: {{ customer.full_name }}</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <a href="{% url 'crm:customer-update' customer.pk %}" class="btn btn-sm btn-outline-secondary">
+      <i class="fas fa-edit"></i> {% trans "Edit Profile" %}
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mb-4">
+      <div class="card-header">{% trans "Personal Details" %}</div>
+      <div class="card-body">
+        <p><strong>{% trans "Phone Number" %}:</strong> {{ customer.phone_number }}</p>
+        <p><strong>{% trans "Email" %}:</strong> {{ customer.email|default:"N/A" }}</p>
+        <p><strong>{% trans "Date of Birth" %}:</strong> {{ customer.date_of_birth }}</p>
+        <p><strong>{% trans "Nationality" %}:</strong> {{ customer.nationality }}</p>
+        <hr>
+        <p><strong>{% trans "Passport Number" %}:</strong> {{ customer.passport_number }}</p>
+        <p><strong>{% trans "Passport Expiry" %}:</strong> {{ customer.passport_expiry_date }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card mb-4">
+      <div class="card-header">{% trans "Uploaded Documents" %}</div>
+      <div class="card-body">
+        <p class="text-muted"><em>{% trans "Document upload functionality will be implemented here." %}</em></p>
+        <ul class="list-group">
+          {% for doc in customer.documents.all %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ doc.file.url }}" target="_blank">{{ doc.get_document_type_display }}</a>
+            <span class="badge bg-primary rounded-pill">{{ doc.get_status_display }}</span>
+          </li>
+          {% empty %}
+          <li class="list-group-item">{% trans "No documents uploaded yet." %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">{% trans "Booking History" %}</div>
+  <div class="card-body">
+    <p class="text-muted"><em>{% trans "Booking history will be displayed here once the bookings module is complete." %}</em></p>
+    </div>
+</div>
+
+<div class="card">
+  <div class="card-header">{% trans "Communication Log" %}</div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Channel" %}</th>
+            <th>{% trans "Trigger" %}</th>
+            <th>{% trans "Status" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in customer.communication_logs.all %}
+          <tr>
+            <td>{{ log.created_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ log.get_channel_display }}</td>
+            <td>{{ log.triggered_by }}</td>
+            <td>{{ log.get_status_display }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="4" class="text-center">{% trans "No communication history." %}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}{% endraw %}

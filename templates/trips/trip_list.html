@@ -1,0 +1,60 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n role_tags %}
+
+{% block title %}{% trans "Trips" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">{% trans "Trip Management" %}</h1>
+  {% if request.user|has_role:'manager' %}
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <a href="{% url 'trips:trip-create' %}" class="btn btn-sm btn-primary">
+      <i class="fas fa-plus"></i> {% trans "Create New Trip" %}
+    </a>
+  </div>
+  {% endif %}
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="btn-group btn-group-sm" role="group">
+            <a href="{% url 'trips:trip-list' %}" class="btn {% if not current_status %}btn-primary{% else %}btn-outline-primary{% endif %}">{% trans "All" %}</a>
+            {% for status_val, status_name in trip_statuses %}
+            <a href="?status={{ status_val }}" class="btn {% if current_status == status_val %}btn-primary{% else %}btn-outline-primary{% endif %}">{{ status_name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>{% trans "Trip Name" %}</th>
+                        <th>{% trans "Departure Date" %}</th>
+                        <th>{% trans "Status" %}</th>
+                        <th>{% trans "Occupancy" %}</th>
+                        <th>{% trans "Price" %}</th>
+                        <th>{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trip in trips %}
+                    <tr>
+                        <td>{{ trip.name }}</td>
+                        <td>{{ trip.departure_date|date:"Y-m-d" }}</td>
+                        <td><span class="badge bg-secondary">{{ trip.get_status_display }}</span></td>
+                        <td>{{ trip.booked_seats }} / {{ trip.total_seats }}</td>
+                        <td>{{ trip.price_per_person }}</td>
+                        <td><a href="{% url 'trips:trip-detail' trip.pk %}" class="btn btn-sm btn-info">{% trans "Details" %}</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">{% trans "No trips found for this status." %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}{% endraw %}

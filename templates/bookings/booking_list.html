@@ -1,0 +1,48 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Bookings" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">{% trans "Booking Management" %}</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <a href="{% url 'bookings:booking-create-step' step=1 %}" class="btn btn-sm btn-primary">
+      <i class="fas fa-plus"></i> {% trans "Create New Booking" %}
+    </a>
+  </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>{% trans "Customer" %}</th>
+                        <th>{% trans "Trip" %}</th>
+                        <th>{% trans "Booking Date" %}</th>
+                        <th>{% trans "Status" %}</th>
+                        <th>{% trans "Balance Due" %}</th>
+                        <th>{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.customer.full_name }}</td>
+                        <td>{{ booking.trip.name }}</td>
+                        <td>{{ booking.booking_date|date:"Y-m-d" }}</td>
+                        <td><span class="badge {{ booking.get_status_badge_class }}">{{ booking.get_status_display }}</span></td>
+                        <td>{{ booking.balance_due }}</td>
+                        <td><a href="{% url 'bookings:booking-detail' booking.pk %}" class="btn btn-sm btn-info">{% trans "Details" %}</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6" class="text-center">{% trans "No bookings found." %}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}{% endraw %}

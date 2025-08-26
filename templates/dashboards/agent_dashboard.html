@@ -1,0 +1,42 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Agent Dashboard" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">{% trans "Agent Dashboard" %}</h1>
+  <a href="{% url 'bookings:booking-create-step' step=1 %}" class="btn btn-primary shadow-sm">
+      <i class="fas fa-plus fa-sm text-white-50"></i> {% trans "Create New Booking" %}
+  </a>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100 border-left-info">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{% trans "My Bookings (Today)" %}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ my_new_bookings_today }}</div>
+                    </div>
+                    <div class="col-auto"><i class="fas fa-calendar-day fa-2x text-gray-300"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card h-100 border-left-warning">
+            <div class="card-body">
+                 <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{% trans "Pending Documents" %}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending_documents_count }}</div>
+                    </div>
+                    <div class="col-auto"><i class="fas fa-folder-open fa-2x text-gray-300"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}{% endraw %}

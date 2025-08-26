@@ -1,0 +1,25 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "New Booking: Step 3" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{% trans "New Booking - Step 3: Confirm Details" %}</h1>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-header">{% trans "Please confirm the following details" %}</div>
+        <div class="card-body">
+            <p><strong>{% trans "Customer" %}:</strong> {{ customer.full_name }}</p>
+            <p><strong>{% trans "Trip" %}:</strong> {{ trip.name }}</p>
+            <p><strong>{% trans "Departure" %}:</strong> {{ trip.departure_date|date:"Y-m-d H:i" }}</p>
+            <p><strong>{% trans "Total Price" %}:</strong> {{ trip.price_per_person }}</p>
+            <hr/>
+            <button type="submit" class="btn btn-success">{% trans "Confirm and Create Booking" %}</button>
+            <a href="{% url 'bookings:booking-create-step' step=1 %}" class="btn btn-secondary">{% trans "Start Over" %}</a>
+        </div>
+    </div>
+</form>
+{% endblock %}{% endraw %}

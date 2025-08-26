@@ -1,0 +1,34 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "New Booking: Step 2" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{% trans "New Booking - Step 2: Select a Trip" %}</h1>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="trip_id" class="form-label">{% trans "Trip" %}</label>
+                <select name="trip_id" id="trip_id" class="form-select" required
+                        hx-get="{% url 'bookings:check-seat-availability' %}"
+                        hx-trigger="change"
+                        hx-target="#seat-availability-info">
+                    <option value="">{% trans "--- Select a Trip ---" %}</option>
+                    {% for trip in trips %}
+                    <option value="{{ trip.id }}">{{ trip.name }} - {{ trip.departure_date|date:"Y-m-d" }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div id="seat-availability-info">
+                {% include "bookings/htmx/check_seat_availability.html" %}
+            </div>
+
+        </div>
+    </div>
+</form>
+{% endblock %}{% endraw %}

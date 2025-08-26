@@ -1,0 +1,24 @@
+# Django Core
+django>=5.0
+python-dotenv
+
+# Database
+psycopg2-binary
+
+# Django REST Framework
+djangorestframework
+
+# Frontend & Forms
+django-crispy-forms
+crispy-bootstrap5
+
+# Reporting
+openpyxl
+WeasyPrint
+
+# Utilities
+django-htmx
+
+# Development & Code Quality
+black
+flake8

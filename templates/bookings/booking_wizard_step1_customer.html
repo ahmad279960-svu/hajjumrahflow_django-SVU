@@ -1,0 +1,27 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "New Booking: Step 1" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{% trans "New Booking - Step 1: Select a Customer" %}</h1>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="customer_id" class="form-label">{% trans "Customer" %}</label>
+                <select name="customer_id" id="customer_id" class="form-select" required>
+                    <option value="">{% trans "--- Select a Customer ---" %}</option>
+                    {% for customer in customers %}
+                    <option value="{{ customer.id }}">{{ customer.full_name }} ({{ customer.passport_number }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">{% trans "Next: Select Trip" %}</button>
+        </div>
+    </div>
+</form>
+{% endblock %}{% endraw %}

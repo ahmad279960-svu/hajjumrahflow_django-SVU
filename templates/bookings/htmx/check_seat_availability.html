@@ -1,0 +1,14 @@
+{% raw %}{% load i18n %}
+
+{% if trip_selected %}
+    {% if seats_available %}
+        <div class="alert alert-success">{% trans "Seats are available!" %}</div>
+        <button type="submit" class="btn btn-primary">{% trans "Next: Confirm Details" %}</button>
+    {% else %}
+        <div class="alert alert-danger">{% trans "Sorry, no seats are available for this trip." %}</div>
+        <button type="submit" class="btn btn-primary" disabled>{% trans "Next: Confirm Details" %}</button>
+    {% endif %}
+{% else %}
+    <div class="alert alert-info">{% trans "Please select a trip to check seat availability." %}</div>
+    <button type="submit" class="btn btn-primary" disabled>{% trans "Next: Confirm Details" %}</button>
+{% endif %}{% endraw %}

@@ -1,0 +1,53 @@
+{% raw %}{% extends "base.html" %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %}{% trans "Booking Details" %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">{% trans "Booking" %} #{{ booking.id }}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card mb-4">
+            <div class="card-header">{% trans "Payment History" %}</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead><tr><th>{% trans "Date" %}</th><th>{% trans "Amount" %}</th><th>{% trans "Method" %}</th><th>{% trans "Recorded By" %}</th></tr></thead>
+                    <tbody>
+                    {% for payment in payments %}
+                        <tr>
+                            <td>{{ payment.payment_date|date:"Y-m-d" }}</td>
+                            <td>{{ payment.amount_paid|floatformat:2 }}</td>
+                            <td>{{ payment.get_payment_method_display }}</td>
+                            <td>{{ payment.recorded_by.username|default:"N/A" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="4" class="text-center">{% trans "No payments recorded yet." %}</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card mb-4">
+            <div class="card-header">{% trans "Financial Summary" %}</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between"><span>{% trans "Total Amount" %}:</span> <strong>{{ booking.total_amount|floatformat:2 }}</strong></li>
+                <li class="list-group-item d-flex justify-content-between"><span>{% trans "Amount Paid" %}:</span> <strong class="text-success">{{ booking.amount_paid|floatformat:2 }}</strong></li>
+                <li class="list-group-item d-flex justify-content-between"><span>{% trans "Balance Due" %}:</span> <strong class="text-danger">{{ booking.balance_due|floatformat:2 }}</strong></li>
+            </ul>
+            <div class="card-body">
+                <h5 class="card-title">{% trans "Add New Payment" %}</h5>
+                <form action="{% url 'bookings:add-payment' booking.pk %}" method="post">
+                    {% csrf_token %}
+                    {{ payment_form|crispy }}
+                    <button type="submit" class="btn btn-primary w-100 mt-2">{% trans "Record Payment" %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}{% endraw %}
