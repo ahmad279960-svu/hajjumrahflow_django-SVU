@@ -1,4 +1,4 @@
-{% raw %}{% load i18n %}
+{% load i18n %}
 
 {% if trip_selected %}
     {% if seats_available %}
@@ -11,4 +11,4 @@
 {% else %}
     <div class="alert alert-info">{% trans "Please select a trip to check seat availability." %}</div>
     <button type="submit" class="btn btn-primary" disabled>{% trans "Next: Confirm Details" %}</button>
-{% endif %}{% endraw %}
+{% endif %}

@@ -1,4 +1,4 @@
-{% raw %}{% if messages %}
+{% if messages %}
 <div class="container-fluid">
     {% for message in messages %}
     <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} alert-dismissible fade show" role="alert">
@@ -7,4 +7,4 @@
     </div>
     {% endfor %}
 </div>
-{% endif %}{% endraw %}
+{% endif %}

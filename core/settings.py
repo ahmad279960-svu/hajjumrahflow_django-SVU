@@ -80,15 +80,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
-# TEMPORARY DIAGNOSTIC - Hardcoding password to bypass .env issues
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hajjumrah_db',
-        'USER': 'hajjumrah_user',
-        'PASSWORD': 'test1234', # Using the simple password directly
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
