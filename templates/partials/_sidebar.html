@@ -1,35 +1,35 @@
 {% load i18n static role_tags %}
 
-<div class="sidebar bg-dark text-white p-3">
-    <div class="sidebar-header text-center py-3">
-        <img src="{% static 'images/logo.png' %}" alt="Logo" width="60">
-        <h5 class="mt-2">HajjUmrahFlow</h5>
+<div class="sidebar">
+    <div class="sidebar-header">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="sidebar-logo">
+        <h5 class="sidebar-title">HajjUmrahFlow</h5>
     </div>
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'dashboard' %}">
-                <i class="fas fa-tachometer-alt me-2"></i>{% trans "Dashboard" %}
+            <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">
+                <i data-feather="home"></i><span>{% trans "Dashboard" %}</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'crm:customer-list' %}">
-                <i class="fas fa-users me-2"></i>{% trans "Customers" %}
+            <a class="nav-link {% if request.resolver_match.app_name == 'crm' %}active{% endif %}" href="{% url 'crm:customer-list' %}">
+                <i data-feather="users"></i><span>{% trans "Customers" %}</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'trips:trip-list' %}">
-                <i class="fas fa-plane-departure me-2"></i>{% trans "Trips" %}
+            <a class="nav-link {% if request.resolver_match.app_name == 'trips' %}active{% endif %}" href="{% url 'trips:trip-list' %}">
+                <i data-feather="send"></i><span>{% trans "Trips" %}</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'bookings:booking-list' %}">
-                <i class="fas fa-file-invoice me-2"></i>{% trans "Bookings" %}
+            <a class="nav-link {% if request.resolver_match.app_name == 'bookings' %}active{% endif %}" href="{% url 'bookings:booking-list' %}">
+                <i data-feather="file-text"></i><span>{% trans "Bookings" %}</span>
             </a>
         </li>
         {% if request.user|has_role:'manager' %}
         <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'reports:dashboard' %}">
-                <i class="fas fa-chart-line me-2"></i>{% trans "Reports" %}
+            <a class="nav-link {% if request.resolver_match.app_name == 'reports' %}active{% endif %}" href="{% url 'reports:dashboard' %}">
+                <i data-feather="bar-chart-2"></i><span>{% trans "Reports" %}</span>
             </a>
         </li>
         {% endif %}

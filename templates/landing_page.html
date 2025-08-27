@@ -1,32 +1,45 @@
 {% load static i18n %}
 <!doctype html>
-<html lang="{{ request.LANGUAGE_CODE }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% trans "Welcome to HajjUmrahFlow" %}</title>
+    <title>Welcome to HajjUmrahFlow | أهلاً بك في HajjUmrahFlow</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <link rel="stylesheet" href="{% static 'css/landing.css' %}">
 </head>
 <body>
 
     <div class="hero-section">
-        <div class="container">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" style="width: 100px; margin-bottom: 1rem;">
-            <h1 class="display-4">HajjUmrahFlow</h1>
-            <p class="lead">{% trans "The integrated solution for managing Hajj and Umrah trips with efficiency and ease." %}</p>
-            <a href="{% url 'login' %}" class="btn btn-primary btn-lg mt-3">
-                <i class="fas fa-sign-in-alt me-2"></i>{% trans "System Login" %}
+        <div class="hero-overlay"></div>
+        <div class="container text-center">
+            <img src="{% static 'images/logo.png' %}" alt="HajjUmrahFlow Logo" class="hero-logo">
+            
+            <div class="title-container">
+                <h1 class="display-3 en-title">HajjUmrahFlow</h1>
+                <h1 class="display-3 ar-title">لتنظيم رحلات الحج والعمرة</h1>
+            </div>
+
+            <div class="subtitle-container">
+                <p class="lead en-subtitle">The integrated solution for managing Hajj and Umrah trips with efficiency and ease.</p>
+                <p class="lead ar-subtitle">الحل المتكامل لإدارة رحلات الحج والعمرة بكفاءة وسهولة.</p>
+            </div>
+            
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg mt-4 hero-button">
+                <span class="en-text"><i class="fas fa-sign-in-alt me-2"></i>System Login</span>
+                <span class="ar-text"><i class="fas fa-sign-in-alt ms-2"></i>دخول إلى النظام</span>
             </a>
         </div>
     </div>
 
-    <footer class="text-center py-3 landing-footer">
-        <div class="container">
-            <span>© {% now "Y" %} HajjUmrahFlow. All Rights Reserved.</span>
-        </div>
-    </footer>
+    <script src="{% static 'js/landing.js' %}"></script>
 
 </body>
 </html>

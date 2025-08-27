@@ -2,25 +2,28 @@
 
 /* --- Brand Color Palette (Derived from Logos) --- */
 :root {
-    --primary-deep-blue: #0A2342;  /* From SVU Logo's dark tones */
-    --accent-gold: #D4AF37;       /* From SVU & App Logo's gold elements */
-    --brand-green: #2E5339;       /* From HajjUmrahFlow Logo's crescent */
+    --primary-deep-blue: #0A2342;
+    --accent-gold: #D4AF37;
+    --brand-green: #2E5339; /* Used in some logo elements, maintain for potential future use */
     --clean-white: #FFFFFF;
-    --light-gray-bg: #F8F9FA;
-    --text-dark: #212529;
-    --text-muted-light: #6c757d;
-    --success: #1cc88a;
-    --info: #36b9cc;
-    --warning: #f6c23e;
-    --danger: #e74a3b;
+    --light-gray-bg: #F0F2F5; /* Slightly darker light gray for better contrast with white cards */
+    --text-dark: #343A40; /* Stronger dark text for readability */
+    --text-muted-light: #6C757D;
+    --border-color: #DEE2E6; /* Clearer border color */
+    --success: #28A745; /* Standard success green */
+    --info: #17A2B8; /* Standard info cyan */
+    --warning: #FFC107; /* Standard warning yellow */
+    --danger: #DC3545; /* Standard danger red */
+    --font-family-sans-serif: 'Poppins', 'Cairo', sans-serif;
 }
 
 /* --- Global Styles & Typography --- */
 body {
-    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-family-sans-serif);
     background-color: var(--light-gray-bg);
     color: var(--text-dark);
     font-size: 1rem;
+    line-height: 1.6; /* Improved line height for readability */
 }
 
 .main-content {
@@ -34,4 +37,14 @@ body {
 /* --- Global Animations --- */
 a, .btn, .nav-link, .card {
     transition: all 0.2s ease-in-out;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700; /* Bolder headings for better hierarchy */
+    color: var(--primary-deep-blue); /* Headings use primary brand color */
+}
+
+/* Ensure good contrast for any text on primary background */
+.sidebar .nav-link span, .sidebar .nav-link i {
+    color: inherit; /* Inherit color from parent nav-link */
 }
