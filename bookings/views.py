@@ -1,12 +1,13 @@
 # bookings/views.py
 
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.base import TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
+from django.http import HttpResponse
 
 # Corrected imports from their respective apps
 from .models import Booking, Payment
@@ -62,34 +63,33 @@ class AddPaymentView(LoginRequiredMixin, FormView):
 
     def form_invalid(self, form):
         messages.error(self.request, _("There was an error in the form. Please correct it and try again."))
-        # To display the errors, we redirect back. The state is lost, but it's simpler
-        # than re-rendering the detail page from this view.
         return redirect('bookings:booking-detail', pk=self.kwargs.get('booking_pk'))
 
 # --- Booking Creation Wizard ---
 
-class BookingCreateWizardView(LoginRequiredMixin, TemplateView):
+class BookingCreateWizardView(LoginRequiredMixin, View):
     """
     A view that orchestrates the multi-step booking creation wizard.
     It uses the session to store data between steps.
+    This version is corrected to properly handle template rendering.
     """
     def get(self, request, *args, **kwargs):
-        # Determine which step to show
         step = kwargs.get('step', 1)
+
         if step == 1:
             template_name = 'bookings/booking_wizard_step1_customer.html'
-            context = {'customers': Customer.objects.all()} # Add search/pagination in a real app
+            context = {'customers': Customer.objects.all()}
         elif step == 2:
             template_name = 'bookings/booking_wizard_step2_trip.html'
             context = {'trips': Trip.objects.filter(status__in=['scheduled', 'active'])}
         elif step == 3:
-            template_name = 'bookings/booking_wizard_step3_confirm.html'
             customer_id = request.session.get('booking_wizard_customer_id')
             trip_id = request.session.get('booking_wizard_trip_id')
             if not customer_id or not trip_id:
                 messages.error(request, _("Session expired or data missing. Please start over."))
                 return redirect(reverse('bookings:booking-create-step', kwargs={'step': 1}))
             
+            template_name = 'bookings/booking_wizard_step3_confirm.html'
             context = {
                 'customer': get_object_or_404(Customer, pk=customer_id),
                 'trip': get_object_or_404(Trip, pk=trip_id),
@@ -97,7 +97,7 @@ class BookingCreateWizardView(LoginRequiredMixin, TemplateView):
         else:
             return redirect(reverse('bookings:booking-create-step', kwargs={'step': 1}))
             
-        return self.render_to_response(context, template_name=template_name)
+        return render(request, template_name, context)
 
     def post(self, request, *args, **kwargs):
         step = kwargs.get('step', 1)
@@ -112,12 +112,16 @@ class BookingCreateWizardView(LoginRequiredMixin, TemplateView):
             trip_id = request.session.get('booking_wizard_trip_id')
             trip = get_object_or_404(Trip, pk=trip_id)
 
+            if trip.available_seats <= 0:
+                messages.error(request, _("Sorry, no seats are available for this trip."))
+                return redirect(reverse('bookings:booking-create-step', kwargs={'step': 2}))
+
             booking = Booking.objects.create(
                 customer_id=customer_id,
                 trip_id=trip_id,
                 created_by=request.user,
                 total_amount=trip.price_per_person,
-                status=Booking.Status.PENDING_DOCUMENTS # Or PENDING_PAYMENT
+                status=Booking.Status.PENDING_DOCUMENTS
             )
             # Clear session data
             del request.session['booking_wizard_customer_id']
@@ -142,11 +146,6 @@ class CheckSeatAvailabilityView(LoginRequiredMixin, View):
             trip = get_object_or_404(Trip, pk=trip_id)
             context['seats_available'] = trip.available_seats > 0
             context['trip_selected'] = True
-        return self.render_to_response(context, template_name='bookings/htmx/check_seat_availability.html')
-
-    def render_to_response(self, context, **response_kwargs):
-        # A helper method for rendering, though it's simple enough to be in get()
-        from django.template.loader import render_to_string
-        from django.http import HttpResponse
-        html = render_to_string(response_kwargs['template_name'], context, request=self.request)
-        return HttpResponse(html)
+        
+        # This is a partial template, so we render it directly
+        return render(request, 'bookings/htmx/check_seat_availability.html', context)

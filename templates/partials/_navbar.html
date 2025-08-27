@@ -12,7 +12,15 @@
                         {{ request.user.username }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+                        <li>
+                            {# Use a form for logout to ensure a POST request for security #}
+                            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                                {% csrf_token %}
+                            </form>
+                            <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">
+                                {% trans "Logout" %}
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
