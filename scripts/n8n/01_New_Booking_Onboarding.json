@@ -1,7 +1,118 @@
 {
   "name": "New Booking Onboarding",
-  "nodes": [],
-  "connections": {},
+  "nodes": [
+    {
+      "parameters": {
+        "path": "webhook/new-booking",
+        "options": {}
+      },
+      "name": "Catch New Booking Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ],
+      "webhookId": "your-unique-webhook-id-here"
+    },
+    {
+      "parameters": {
+        "url": "={{$env.DJANGO_API_URL}}/api/v1/bookings/{{$json.body.booking_id}}/",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "name": "Get Full Booking Details",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        650,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "your-api-token-credential-id",
+          "name": "Django API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "to": "={{$node[\"Get Full Booking Details\"].json.customer.email}}",
+        "subject": "Confirmation of your booking for: {{$node[\"Get Full Booking Details\"].json.trip.name}}",
+        "html": "<h3>Welcome, {{$node['Get Full Booking Details'].json.customer.full_name}}!</h3><p>We are pleased to confirm receipt of your booking request for the trip: <b>{{$node['Get Full Booking Details'].json.trip.name}}</b>.</p><p>The next step is to provide us with the required documents (passport copy and personal photo). Our team will follow up with you shortly.</p><p>Best regards,<br>HajjUmrahFlow Team</p>"
+      },
+      "name": "Send Welcome Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        850,
+        200
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "your-gmail-credential-id",
+          "name": "My Gmail Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{$env.DJANGO_API_URL}}/api/v1/crm/communication-logs/",
+        "authentication": "headerAuth",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"customer\": {{$node[\"Get Full Booking Details\"].json.customer.id}},\n  \"channel\": \"email\",\n  \"content\": \"{{$node['Send Welcome Email'].json.subject}}\",\n  \"status\": \"sent\",\n  \"triggered_by\": \"New Booking Onboarding Workflow\"\n}"
+      },
+      "name": "Log Email Action",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1050,
+        200
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "your-api-token-credential-id",
+          "name": "Django API Token"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Catch New Booking Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Full Booking Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Full Booking Details": {
+      "main": [
+        [
+          {
+            "node": "Send Welcome Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Welcome Email": {
+      "main": [
+        [
+          {
+            "node": "Log Email Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "active": false,
   "settings": {},
   "id": "1"

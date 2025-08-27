@@ -1,7 +1,84 @@
 {
   "name": "Payment Receipt",
-  "nodes": [],
-  "connections": {},
+  "nodes": [
+    {
+      "parameters": {
+        "path": "webhook/new-payment",
+        "options": {}
+      },
+      "name": "Catch New Payment Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.DJANGO_API_URL}}/api/v1/bookings/{{$json.body.booking_id}}/",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "name": "Get Booking & Payment Details",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        650,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "your-api-token-credential-id",
+          "name": "Django API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "to": "={{$node[\"Get Booking & Payment Details\"].json.customer.email}}",
+        "subject": "Payment Receipt for your booking: {{$node[\"Get Booking & Payment Details\"].json.trip.name}}",
+        "html": "<h3>Dear {{$node['Get Booking & Payment Details'].json.customer.full_name}},</h3><p>We confirm receipt of your payment for the trip: <b>{{$node['Get Booking & Payment Details'].json.trip.name}}</b>.</p><ul><li>Amount Paid: {{$node['Get Booking & Payment Details'].json.payments.slice(-1)[0].amount_paid}}</li><li>Payment Date: {{$node['Get Booking & Payment Details'].json.payments.slice(-1)[0].payment_date}}</li><li>Balance Due: {{$node['Get Booking & Payment Details'].json.balance_due}}</li></ul><p>Thank you for your payment.</p>"
+      },
+      "name": "Send Receipt Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "your-gmail-credential-id",
+          "name": "My Gmail Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Catch New Payment Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Booking & Payment Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Booking & Payment Details": {
+      "main": [
+        [
+          {
+            "node": "Send Receipt Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "active": false,
   "settings": {},
   "id": "2"

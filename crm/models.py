@@ -18,8 +18,6 @@ class Customer(models.Model):
     date_of_birth = models.DateField(_("Date of Birth"))
 
     # Foreign key to the user who created this customer record.
-    # ON_DELETE=models.SET_NULL means if the employee user is deleted,
-    # the customer record is kept but no longer associated with that employee.
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
@@ -53,12 +51,9 @@ class Document(models.Model):
         UPLOADED = 'uploaded', _('Uploaded')
         VERIFIED = 'verified', _('Verified')
 
-    # Each document must be linked to a customer.
-    # ON_DELETE=models.CASCADE means if a customer is deleted, all their documents are also deleted.
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='documents')
     document_type = models.CharField(_("Document Type"), max_length=20, choices=DocumentType.choices)
     
-    # It's good practice to organize uploads into subdirectories.
     file = models.FileField(_("File"), upload_to='customer_documents/%Y/%m/')
     status = models.CharField(_("Status"), max_length=20, choices=DocumentStatus.choices, default=DocumentStatus.UPLOADED)
     uploaded_at = models.DateTimeField(auto_now_add=True)
@@ -73,7 +68,7 @@ class Document(models.Model):
 
 class CommunicationLog(models.Model):
     """
-    Logs all automated communications sent to a customer via n8n.
+    Logs all automated communications sent to a customer.
     This provides a complete audit trail of interactions.
     """
     class ChannelType(models.TextChoices):

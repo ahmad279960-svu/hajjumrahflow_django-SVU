@@ -1,7 +1,84 @@
 {
   "name": "Daily Payment Reminder",
-  "nodes": [],
-  "connections": {},
+  "nodes": [
+    {
+      "parameters": {
+        "rule": "daily",
+        "hour": 10
+      },
+      "name": "Run Daily at 10 AM",
+      "type": "n8n-nodes-base.schedule",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.DJANGO_API_URL}}/api/v1/bookings/?status=pending_payment",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "name": "Get Bookings Pending Payment",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        650,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "your-api-token-credential-id",
+          "name": "Django API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "to": "={{$json.customer.email}}",
+        "subject": "Reminder: Payment Due for your booking on {{$json.trip.name}}",
+        "html": "<h3>Dear {{$json.customer.full_name}},</h3><p>This is a reminder that a payment is due for your booking on trip <b>{{$json.trip.name}}</b>. Your current balance is <b>{{$json.balance_due}}</b>.</p><p>Please contact our office to arrange the payment.</p>"
+      },
+      "name": "Send Payment Reminder",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "your-gmail-credential-id",
+          "name": "My Gmail Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Run Daily at 10 AM": {
+      "main": [
+        [
+          {
+            "node": "Get Bookings Pending Payment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Bookings Pending Payment": {
+      "main": [
+        [
+          {
+            "node": "Send Payment Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "active": false,
   "settings": {},
   "id": "4"

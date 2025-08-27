@@ -1,7 +1,84 @@
 {
   "name": "Document Submission Reminder",
-  "nodes": [],
-  "connections": {},
+  "nodes": [
+    {
+      "parameters": {
+        "rule": "custom",
+        "custom": "0 9 * * 1-5"
+      },
+      "name": "Run on Weekdays at 9 AM",
+      "type": "n8n-nodes-base.schedule",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.DJANGO_API_URL}}/api/v1/bookings/?status=pending_documents",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "name": "Get Bookings Pending Docs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        650,
+        300
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "your-api-token-credential-id",
+          "name": "Django API Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "to": "={{$json.customer.email}}",
+        "subject": "Reminder: Please Submit Your Documents for trip {{$json.trip.name}}",
+        "html": "<h3>Dear {{$json.customer.full_name}},</h3><p>This is a friendly reminder to please submit your required documents (passport copy, personal photo) for your booking on trip <b>{{$json.trip.name}}</b> at your earliest convenience.</p>"
+      },
+      "name": "Send Reminder Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "your-gmail-credential-id",
+          "name": "My Gmail Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Run on Weekdays at 9 AM": {
+      "main": [
+        [
+          {
+            "node": "Get Bookings Pending Docs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Bookings Pending Docs": {
+      "main": [
+        [
+          {
+            "node": "Send Reminder Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "active": false,
   "settings": {},
   "id": "3"
