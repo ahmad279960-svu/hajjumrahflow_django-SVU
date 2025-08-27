@@ -1,0 +1,31 @@
+/* static/css/style.css */
+
+/* --- Branding Colors (derived from blue/gold/white concept) --- */
+:root {
+    --primary-color: #0d6efd; /* Deep Blue */
+    --secondary-color: #6c757d;
+    --accent-color: #ffc107; /* Gold */
+    --light-color: #f8f9fa; /* Clean White/Off-white */
+    --dark-color: #212529; /* Deepest Blue/Black */
+}
+
+/* --- Base Layout --- */
+body {
+    background-color: var(--light-color);
+}
+
+.sidebar {
+    width: 280px;
+    min-height: 100vh;
+    transition: margin-left 0.3s;
+}
+
+.main-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    background-color: #ffffff;
+}

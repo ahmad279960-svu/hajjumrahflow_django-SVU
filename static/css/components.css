@@ -1,0 +1,76 @@
+/* static/css/components.css */
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: var(--primary-deep-blue);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.sidebar-header {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
+    border-left: 3px solid transparent;
+}
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--clean-white);
+    border-left: 3px solid var(--accent-gold);
+}
+.sidebar .nav-link.active {
+    background-color: var(--accent-gold);
+    color: var(--primary-deep-blue);
+    font-weight: 600;
+}
+.sidebar .nav-link .fas {
+    width: 25px;
+    margin-right: 0.5rem;
+}
+
+/* --- Cards & Dashboard Widgets --- */
+.card {
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+}
+.card-header {
+    font-weight: 600;
+    background-color: var(--clean-white);
+    border-bottom: 1px solid #e3e6f0;
+}
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.3rem 2rem 0 rgba(58, 59, 69, 0.15);
+}
+.card .border-left-primary { border-left: .25rem solid var(--primary-deep-blue)!important; }
+.card .border-left-success { border-left: .25rem solid var(--brand-green)!important; }
+.card .border-left-info { border-left: .25rem solid var(--info)!important; }
+.card .border-left-warning { border-left: .25rem solid var(--accent-gold)!important; }
+
+/* --- Buttons --- */
+.btn-primary {
+    background-color: var(--primary-deep-blue);
+    border-color: var(--primary-deep-blue);
+}
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
+/* --- Footer & Modal --- */
+.footer {
+    background-color: var(--clean-white);
+    box-shadow: 0 -5px 10px -5px rgba(0,0,0,0.05);
+}
+.footer button img {
+    transition: transform 0.2s ease-in-out;
+}
+.footer button:hover img {
+    transform: scale(1.15) rotate(5deg);
+}
+#svuInfoModal .modal-header {
+    border-bottom: 2px solid var(--accent-gold);
+}

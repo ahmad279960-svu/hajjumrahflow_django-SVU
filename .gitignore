@@ -5,11 +5,11 @@ __pycache__/
 venv/
 
 # Environment
-.env
+#.env
 
 # Static & Media files
-/static/
-/media/
+# /static/
+# /media/
 
 # IDE / Editor
 .vscode/
