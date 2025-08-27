@@ -9,30 +9,85 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 mb-4">
+    <div class="col-xl-4 col-md-6 mb-4">
         <div class="card h-100 border-left-success">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{% trans "Collected Today" %}</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ collected_today }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">${{ collected_today }}</div>
                     </div>
                     <div class="col-auto"><i class="fas fa-cash-register fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-6 mb-4">
+    <div class="col-xl-4 col-md-6 mb-4">
         <div class="card h-100 border-left-danger">
             <div class="card-body">
                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">{% trans "Overdue Payments" %}</div>
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">{% trans "Bookings with Overdue Payments" %}</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ overdue_payments_count }}</div>
                     </div>
                     <div class="col-auto"><i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i></div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card h-100 border-left-warning">
+            <div class="card-body">
+                 <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{% trans "Expenses (This Month)" %}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">${{ total_expenses_month }}</div>
+                    </div>
+                    <div class="col-auto"><i class="fas fa-receipt fa-2x text-gray-300"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{% trans "Recent Transactions" %}</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>{% trans "Date" %}</th>
+                        <th>{% trans "Customer" %}</th>
+                        <th>{% trans "Amount Paid" %}</th>
+                        <th>{% trans "Method" %}</th>
+                        <th>{% trans "Recorded By" %}</th>
+                        <th>{% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in recent_payments %}
+                    <tr>
+                        <td>{{ payment.payment_date|date:"Y-m-d" }}</td>
+                        <td>{{ payment.booking.customer.full_name }}</td>
+                        <td class="text-success fw-bold">${{ payment.amount_paid|floatformat:2 }}</td>
+                        <td>{{ payment.get_payment_method_display }}</td>
+                        <td>{{ payment.recorded_by.username|default:"-" }}</td>
+                        <td>
+                            <a href="{% url 'bookings:booking-detail' payment.booking.pk %}" class="btn btn-sm btn-outline-info">
+                                {% trans "View Booking" %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">{% trans "No recent payments recorded." %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

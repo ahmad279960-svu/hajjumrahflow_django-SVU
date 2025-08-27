@@ -1,0 +1,90 @@
+/* static/css/rtl.css */
+
+/* --- General RTL Adjustments --- */
+body {
+    text-align: right;
+    direction: rtl;
+}
+
+/* --- Bootstrap Overrides for RTL --- */
+
+/* Adjust margins and paddings */
+.ms-auto {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.me-1 { margin-right: 0 !important; margin-left: 0.25rem !important; }
+.me-2 { margin-right: 0 !important; margin-left: 0.5rem !important; }
+.me-3 { margin-right: 0 !important; margin-left: 1rem !important; }
+
+.ms-1 { margin-left: 0 !important; margin-right: 0.25rem !important; }
+.ms-2 { margin-left: 0 !important; margin-right: 0.5rem !important; }
+.ms-3 { margin-left: 0 !important; margin-right: 1rem !important; }
+
+
+.dropdown-menu-end {
+    right: auto !important;
+    left: 0 !important;
+}
+
+.text-end {
+    text-align: left !important;
+}
+
+.border-left-primary {
+    border-left: 0 !important;
+    border-right: .25rem solid var(--primary-deep-blue)!important;
+}
+.border-left-success {
+    border-left: 0 !important;
+    border-right: .25rem solid var(--brand-green)!important;
+}
+.border-left-info {
+    border-left: 0 !important;
+    border-right: .25rem solid var(--info)!important;
+}
+.border-left-warning {
+    border-left: 0 !important;
+    border-right: .25rem solid var(--accent-gold)!important;
+}
+
+
+/* --- Component Specific RTL --- */
+
+/* Sidebar */
+.sidebar .nav-link {
+    border-left: 3px solid transparent;
+    border-right: 0;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    border-right: 3px solid var(--accent-gold);
+    border-left: 0;
+}
+
+.sidebar .nav-link .fas {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+
+/* Navbar */
+.navbar-nav {
+    padding-right: 0; /* Reset default padding */
+}
+
+/* Forms */
+.form-check-inline {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+
+.form-select {
+    background-position: left 0.75rem center;
+}
+
+/* Close button in alerts/modals */
+.btn-close {
+    float: left;
+}

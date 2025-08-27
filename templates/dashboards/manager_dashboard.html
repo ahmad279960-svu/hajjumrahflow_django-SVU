@@ -9,53 +9,92 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4 mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
         <div class="card h-100 border-left-primary">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{% trans "Revenue (Month)" %}</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_revenue }}</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{% trans "Revenue (This Month)" %}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">${{ total_revenue_month }}</div>
                     </div>
                     <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
         <div class="card h-100 border-left-success">
             <div class="card-body">
                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{% trans "New Bookings (Week)" %}</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ new_bookings_week }}</div>
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">{% trans "New Bookings (Month)" %}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ new_bookings_month }}</div>
                     </div>
                     <div class="col-auto"><i class="fas fa-file-invoice fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
         <div class="card h-100 border-left-info">
             <div class="card-body">
                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{% trans "Active Trips" %}</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ active_trips }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ active_trips_count }}</div>
                     </div>
                     <div class="col-auto"><i class="fas fa-plane-departure fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100 border-left-warning">
+            <div class="card-body">
+                 <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{% trans "Total Customers" %}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_customers_count }}</div>
+                    </div>
+                    <div class="col-auto"><i class="fas fa-users fa-2x text-gray-300"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="card">
-    <div class="card-header bg-white">
-        {% trans "Upcoming Trip Occupancy" %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{% trans "Upcoming Trip Occupancy Rate" %}</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-bar" style="height: 320px;">
+                    <canvas id="occupancyChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <canvas id="occupancyChart"></canvas>
+    <div class="col-lg-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{% trans "Recent Bookings" %}</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for booking in recent_bookings %}
+                    <a href="{% url 'bookings:booking-detail' booking.pk %}" class="list-group-item list-group-item-action">
+                        <strong>{{ booking.customer.full_name }}</strong>
+                        <br>
+                        <small class="text-muted">{{ booking.trip.name }} - {{ booking.booking_date|timesince }} {% trans "ago" %}</small>
+                    </a>
+                    {% empty %}
+                    <li class="list-group-item">{% trans "No recent bookings." %}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -75,11 +114,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 datasets: [{
                     label: '{% trans "% Occupancy" %}',
                     data: tripOccupancy,
-                    backgroundColor: 'rgba(13, 110, 253, 0.8)',
-                    borderColor: 'rgba(13, 110, 253, 1)',
+                    backgroundColor: 'rgba(10, 35, 66, 0.8)', // var(--primary-deep-blue)
+                    borderColor: 'rgba(212, 175, 55, 1)',   // var(--accent-gold)
                     borderWidth: 1,
                     borderRadius: 5,
-                    hoverBackgroundColor: 'rgba(13, 110, 253, 1)'
+                    hoverBackgroundColor: 'rgba(212, 175, 55, 0.8)'
                 }]
             },
             options: {

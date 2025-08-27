@@ -1,0 +1,1022 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-27 19:55+0300\n"
+"PO-Revision-Date: 2025-08-27 20:30+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\bookings\apps.py:9
+msgid "Bookings Management"
+msgstr "إدارة الحجوزات"
+
+#: .\bookings\models.py:15
+msgid "Pending Documents"
+msgstr "بانتظار المستندات"
+
+#: .\bookings\models.py:16
+msgid "Pending Payment"
+msgstr "بانتظار الدفع"
+
+#: .\bookings\models.py:17
+msgid "Confirmed"
+msgstr "مؤكد"
+
+#: .\bookings\models.py:18
+msgid "Fully Paid"
+msgstr "مدفوع بالكامل"
+
+#: .\bookings\models.py:19 .\trips\models.py:19
+msgid "Cancelled"
+msgstr "ملغي"
+
+#: .\bookings\models.py:31 .\templates\bookings\booking_detail.html:38
+msgid "Total Amount"
+msgstr "المبلغ الإجمالي"
+
+#: .\bookings\models.py:33 .\crm\models.py:58 .\crm\models.py:92
+#: .\templates\bookings\booking_list.html:25
+#: .\templates\crm\customer_detail.html:69 .\templates\trips\trip_list.html:34
+#: .\trips\models.py:28
+msgid "Status"
+msgstr "الحالة"
+
+#: .\bookings\models.py:39
+msgid "Last Reminder Sent"
+msgstr "آخر تذكير أرسل"
+
+#: .\bookings\models.py:53
+msgid "There are no available seats for this trip."
+msgstr "لا توجد مقاعد متاحة لهذه الرحلة."
+
+#: .\bookings\models.py:82 .\templates\bookings\booking_detail.html:8
+msgid "Booking"
+msgstr "الحجز"
+
+#: .\bookings\models.py:83 .\templates\bookings\booking_list.html:4
+#: .\templates\partials\_sidebar.html:26
+msgid "Bookings"
+msgstr "الحجوزات"
+
+#: .\bookings\models.py:92
+msgid "Cash"
+msgstr "نقداً"
+
+#: .\bookings\models.py:93
+msgid "Bank Transfer"
+msgstr "حوالة بنكية"
+
+#: .\bookings\models.py:94
+msgid "Online"
+msgstr "عبر الإنترنت"
+
+#: .\bookings\models.py:97 .\templates\bookings\booking_detail.html:39
+#: .\templates\dashboards\accountant_dashboard.html:64
+msgid "Amount Paid"
+msgstr "المبلغ المدفوع"
+
+#: .\bookings\models.py:98
+msgid "Payment Date"
+msgstr "تاريخ الدفع"
+
+#: .\bookings\models.py:100
+msgid "Payment Method"
+msgstr "طريقة الدفع"
+
+#: .\bookings\models.py:118
+msgid "Amount paid must be a positive number."
+msgstr "يجب أن يكون المبلغ المدفوع رقمًا موجبًا."
+
+#: .\bookings\models.py:121
+msgid "Payment"
+msgstr "دفعة"
+
+#: .\bookings\models.py:122
+msgid "Payments"
+msgstr "الدفعات"
+
+#: .\bookings\views.py:61
+msgid "Payment recorded successfully."
+msgstr "تم تسجيل الدفعة بنجاح."
+
+#: .\bookings\views.py:65
+msgid "There was an error in the form. Please correct it and try again."
+msgstr "حدث خطأ في النموذج. يرجى تصحيحه والمحاولة مرة أخرى."
+
+#: .\bookings\views.py:89
+msgid "Session expired or data missing. Please start over."
+msgstr "انتهت صلاحية الجلسة أو البيانات مفقودة. يرجى البدء من جديد."
+
+#: .\bookings\views.py:116
+#: .\templates\bookings\htmx\check_seat_availability.html:8
+msgid "Sorry, no seats are available for this trip."
+msgstr "عذراً، لا توجد مقاعد متاحة لهذه الرحلة."
+
+#: .\bookings\views.py:130
+msgid "Booking created successfully!"
+msgstr "تم إنشاء الحجز بنجاح!"
+
+#: .\core\apps.py:9
+msgid "Core"
+msgstr "النواة"
+
+#: .\core\settings.py:125
+msgid "English"
+msgstr "الإنجليزية"
+
+#: .\core\settings.py:126
+msgid "Arabic"
+msgstr "العربية"
+
+#: .\crm\apps.py:12
+msgid "Customer Relationship Management"
+msgstr "إدارة علاقات العملاء"
+
+#: .\crm\forms.py:22
+msgid "Enter full name"
+msgstr "أدخل الاسم الكامل"
+
+#: .\crm\forms.py:23
+msgid "e.g., +963987654321"
+msgstr "مثال: +963987654321"
+
+#: .\crm\forms.py:24
+msgid "e.g., user@example.com"
+msgstr "مثال: user@example.com"
+
+#: .\crm\forms.py:25
+msgid "Enter passport number"
+msgstr "أدخل رقم جواز السفر"
+
+#: .\crm\forms.py:26
+msgid "e.g., Syrian"
+msgstr "مثال: سوري"
+
+#: .\crm\forms.py:43
+msgid "A customer with this phone number already exists."
+msgstr "يوجد عميل بهذا الرقم مسبقاً."
+
+#: .\crm\forms.py:58
+msgid "A customer with this passport number already exists."
+msgstr "يوجد عميل برقم جواز السفر هذا مسبقاً."
+
+#: .\crm\models.py:12 .\templates\crm\customer_list.html:32
+#: .\templates\reports\pdf\manifest_template.html:23
+msgid "Full Name"
+msgstr "الاسم الكامل"
+
+#: .\crm\models.py:13 .\templates\crm\customer_detail.html:21
+#: .\templates\crm\customer_list.html:33
+msgid "Phone Number"
+msgstr "رقم الهاتف"
+
+#: .\crm\models.py:14
+msgid "Email Address"
+msgstr "البريد الإلكتروني"
+
+#: .\crm\models.py:15 .\templates\crm\customer_detail.html:26
+#: .\templates\crm\customer_list.html:34
+#: .\templates\reports\pdf\manifest_template.html:24
+msgid "Passport Number"
+msgstr "رقم جواز السفر"
+
+#: .\crm\models.py:16
+msgid "Passport Expiry Date"
+msgstr "تاريخ انتهاء جواز السفر"
+
+#: .\crm\models.py:17 .\templates\crm\customer_detail.html:24
+#: .\templates\crm\customer_list.html:35
+#: .\templates\reports\pdf\manifest_template.html:25
+msgid "Nationality"
+msgstr "الجنسية"
+
+#: .\crm\models.py:18 .\templates\crm\customer_detail.html:23
+msgid "Date of Birth"
+msgstr "تاريخ الميلاد"
+
+#: .\crm\models.py:34 .\templates\bookings\booking_list.html:22
+#: .\templates\bookings\booking_wizard_step1_customer.html:15
+#: .\templates\bookings\booking_wizard_step3_confirm.html:15
+#: .\templates\dashboards\accountant_dashboard.html:63
+msgid "Customer"
+msgstr "العميل"
+
+#: .\crm\models.py:35 .\templates\crm\customer_list.html:4
+#: .\templates\partials\_sidebar.html:16
+msgid "Customers"
+msgstr "العملاء"
+
+#: .\crm\models.py:45
+msgid "Passport Copy"
+msgstr "صورة جواز السفر"
+
+#: .\crm\models.py:46
+msgid "Personal Photo"
+msgstr "صورة شخصية"
+
+#: .\crm\models.py:47
+msgid "Other"
+msgstr "أخرى"
+
+#: .\crm\models.py:50
+msgid "Required"
+msgstr "مطلوب"
+
+#: .\crm\models.py:51
+msgid "Uploaded"
+msgstr "تم الرفع"
+
+#: .\crm\models.py:52
+msgid "Verified"
+msgstr "تم التحقق"
+
+#: .\crm\models.py:55
+msgid "Document Type"
+msgstr "نوع المستند"
+
+#: .\crm\models.py:57
+msgid "File"
+msgstr "الملف"
+
+#: .\crm\models.py:65
+msgid "Document"
+msgstr "مستند"
+
+#: .\crm\models.py:66
+msgid "Documents"
+msgstr "المستندات"
+
+#: .\crm\models.py:75 .\templates\crm\customer_detail.html:22
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: .\crm\models.py:76
+msgid "WhatsApp"
+msgstr "واتساب"
+
+#: .\crm\models.py:77
+msgid "SMS"
+msgstr "رسالة نصية"
+
+#: .\crm\models.py:80
+msgid "Outgoing"
+msgstr "صادرة"
+
+#: .\crm\models.py:81
+msgid "Incoming"
+msgstr "واردة"
+
+#: .\crm\models.py:84
+msgid "Sent"
+msgstr "تم الإرسال"
+
+#: .\crm\models.py:85
+msgid "Delivered"
+msgstr "تم التوصيل"
+
+#: .\crm\models.py:86
+msgid "Failed"
+msgstr "فشل"
+
+#: .\crm\models.py:89 .\templates\crm\customer_detail.html:67
+msgid "Channel"
+msgstr "القناة"
+
+#: .\crm\models.py:90
+msgid "Direction"
+msgstr "الاتجاه"
+
+#: .\crm\models.py:91
+msgid "Content"
+msgstr "المحتوى"
+
+#: .\crm\models.py:93
+msgid "Triggered By"
+msgstr "بواسطة"
+
+#: .\crm\models.py:93
+msgid "e.g., 'New Booking Onboarding Workflow'"
+msgstr "مثال: 'سير عمل تأهيل الحجز الجديد'"
+
+#: .\crm\models.py:100 .\templates\crm\customer_detail.html:60
+msgid "Communication Log"
+msgstr "سجل الاتصالات"
+
+#: .\crm\models.py:101
+msgid "Communication Logs"
+msgstr "سجلات الاتصالات"
+
+#: .\crm\views.py:73
+msgid "Customer created successfully."
+msgstr "تم إنشاء العميل بنجاح."
+
+#: .\crm\views.py:78
+msgid "Create New Customer"
+msgstr "إنشاء عميل جديد"
+
+#: .\crm\views.py:94
+msgid "Customer details updated successfully."
+msgstr "تم تحديث تفاصيل العميل بنجاح."
+
+#: .\crm\views.py:99
+msgid "Update Customer"
+msgstr "تحديث العميل"
+
+#: .\reports\apps.py:9
+msgid "Reporting & Analytics"
+msgstr "التقارير والتحليلات"
+
+#: .\templates\base.html:7 .\templates\login.html:28
+msgid "HajjUmrahFlow"
+msgstr "HajjUmrahFlow"
+
+#: .\templates\bookings\booking_detail.html:4
+msgid "Booking Details"
+msgstr "تفاصيل الحجز"
+
+#: .\templates\bookings\booking_detail.html:14
+msgid "Payment History"
+msgstr "سجل المدفوعات"
+
+#: .\templates\bookings\booking_detail.html:17
+#: .\templates\crm\customer_detail.html:66
+#: .\templates\dashboards\accountant_dashboard.html:62
+#: .\templates\trips\trip_detail.html:81
+msgid "Date"
+msgstr "التاريخ"
+
+#: .\templates\bookings\booking_detail.html:17
+#: .\templates\trips\trip_detail.html:81 .\trips\models.py:105
+msgid "Amount"
+msgstr "المبلغ"
+
+#: .\templates\bookings\booking_detail.html:17
+#: .\templates\dashboards\accountant_dashboard.html:65
+msgid "Method"
+msgstr "الطريقة"
+
+#: .\templates\bookings\booking_detail.html:17
+#: .\templates\dashboards\accountant_dashboard.html:66
+msgid "Recorded By"
+msgstr "سجلت بواسطة"
+
+#: .\templates\bookings\booking_detail.html:27
+msgid "No payments recorded yet."
+msgstr "لم يتم تسجيل أي دفعات بعد."
+
+#: .\templates\bookings\booking_detail.html:36
+#: .\templates\trips\trip_detail.html:16
+msgid "Financial Summary"
+msgstr "الملخص المالي"
+
+#: .\templates\bookings\booking_detail.html:40
+#: .\templates\bookings\booking_list.html:26
+msgid "Balance Due"
+msgstr "الرصيد المستحق"
+
+#: .\templates\bookings\booking_detail.html:43
+msgid "Add New Payment"
+msgstr "إضافة دفعة جديدة"
+
+#: .\templates\bookings\booking_detail.html:47
+#: .\templates\bookings\payment_form.html:17
+msgid "Record Payment"
+msgstr "تسجيل الدفعة"
+
+#: .\templates\bookings\booking_form.html:4
+msgid "New Booking"
+msgstr "حجز جديد"
+
+#: .\templates\bookings\booking_form.html:8
+msgid "Create Booking"
+msgstr "إنشاء حجز"
+
+#: .\templates\bookings\booking_form.html:17
+msgid "Save Booking"
+msgstr "حفظ الحجز"
+
+#: .\templates\bookings\booking_form.html:18
+#: .\templates\bookings\payment_form.html:18
+#: .\templates\crm\customer_form.html:18 .\templates\trips\trip_form.html:18
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: .\templates\bookings\booking_list.html:8
+msgid "Booking Management"
+msgstr "إدارة الحجوزات"
+
+#: .\templates\bookings\booking_list.html:11
+#: .\templates\dashboards\agent_dashboard.html:10
+msgid "Create New Booking"
+msgstr "إنشاء حجز جديد"
+
+#: .\templates\bookings\booking_list.html:23
+#: .\templates\bookings\booking_wizard_step2_trip.html:15
+#: .\templates\bookings\booking_wizard_step3_confirm.html:16
+#: .\trips\models.py:93
+msgid "Trip"
+msgstr "الرحلة"
+
+#: .\templates\bookings\booking_list.html:24
+msgid "Booking Date"
+msgstr "تاريخ الحجز"
+
+#: .\templates\bookings\booking_list.html:27
+#: .\templates\crm\customer_list.html:36
+#: .\templates\dashboards\accountant_dashboard.html:67
+#: .\templates\trips\trip_list.html:37
+msgid "Actions"
+msgstr "الإجراءات"
+
+#: .\templates\bookings\booking_list.html:38
+#: .\templates\trips\trip_list.html:48
+msgid "Details"
+msgstr "تفاصيل"
+
+#: .\templates\bookings\booking_list.html:41
+msgid "No bookings found."
+msgstr "لم يتم العثور على حجوزات."
+
+#: .\templates\bookings\booking_wizard_step1_customer.html:4
+msgid "New Booking: Step 1"
+msgstr "حجز جديد: الخطوة 1"
+
+#: .\templates\bookings\booking_wizard_step1_customer.html:8
+msgid "New Booking - Step 1: Select a Customer"
+msgstr "حجز جديد - الخطوة 1: اختر عميل"
+
+#: .\templates\bookings\booking_wizard_step1_customer.html:17
+msgid "--- Select a Customer ---"
+msgstr "--- اختر عميل ---"
+
+#: .\templates\bookings\booking_wizard_step1_customer.html:23
+msgid "Next: Select Trip"
+msgstr "التالي: اختر رحلة"
+
+#: .\templates\bookings\booking_wizard_step2_trip.html:4
+msgid "New Booking: Step 2"
+msgstr "حجز جديد: الخطوة 2"
+
+#: .\templates\bookings\booking_wizard_step2_trip.html:8
+msgid "New Booking - Step 2: Select a Trip"
+msgstr "حجز جديد - الخطوة 2: اختر رحلة"
+
+#: .\templates\bookings\booking_wizard_step2_trip.html:20
+msgid "--- Select a Trip ---"
+msgstr "--- اختر رحلة ---"
+
+#: .\templates\bookings\booking_wizard_step3_confirm.html:4
+msgid "New Booking: Step 3"
+msgstr "حجز جديد: الخطوة 3"
+
+#: .\templates\bookings\booking_wizard_step3_confirm.html:8
+msgid "New Booking - Step 3: Confirm Details"
+msgstr "حجز جديد - الخطوة 3: تأكيد التفاصيل"
+
+#: .\templates\bookings\booking_wizard_step3_confirm.html:13
+msgid "Please confirm the following details"
+msgstr "يرجى تأكيد التفاصيل التالية"
+
+#: .\templates\bookings\booking_wizard_step3_confirm.html:17
+#: .\templates\reports\pdf\manifest_template.html:18
+msgid "Departure"
+msgstr "المغادرة"
+
+#: .\templates\bookings\booking_wizard_step3_confirm.html:18
+msgid "Total Price"
+msgstr "السعر الإجمالي"
+
+#: .\templates\bookings\booking_wizard_step3_confirm.html:20
+msgid "Confirm and Create Booking"
+msgstr "تأكيد وإنشاء الحجز"
+
+#: .\templates\bookings\booking_wizard_step3_confirm.html:21
+msgid "Start Over"
+msgstr "البدء من جديد"
+
+#: .\templates\bookings\htmx\check_seat_availability.html:5
+msgid "Seats are available!"
+msgstr "المقاعد متاحة!"
+
+#: .\templates\bookings\htmx\check_seat_availability.html:6
+#: .\templates\bookings\htmx\check_seat_availability.html:9
+#: .\templates\bookings\htmx\check_seat_availability.html:13
+msgid "Next: Confirm Details"
+msgstr "التالي: تأكيد التفاصيل"
+
+#: .\templates\bookings\htmx\check_seat_availability.html:12
+msgid "Please select a trip to check seat availability."
+msgstr "يرجى اختيار رحلة للتحقق من توفر المقاعد."
+
+#: .\templates\bookings\payment_form.html:4
+msgid "Add Payment"
+msgstr "إضافة دفعة"
+
+#: .\templates\bookings\payment_form.html:8
+msgid "Add Payment for Booking"
+msgstr "إضافة دفعة للحجز"
+
+#: .\templates\crm\customer_detail.html:8
+msgid "Customer Profile"
+msgstr "ملف العميل"
+
+#: .\templates\crm\customer_detail.html:11
+msgid "Edit Profile"
+msgstr "تعديل الملف الشخصي"
+
+#: .\templates\crm\customer_detail.html:19
+msgid "Personal Details"
+msgstr "التفاصيل الشخصية"
+
+#: .\templates\crm\customer_detail.html:27
+msgid "Passport Expiry"
+msgstr "انتهاء صلاحية الجواز"
+
+#: .\templates\crm\customer_detail.html:34
+msgid "Uploaded Documents"
+msgstr "المستندات المرفوعة"
+
+#: .\templates\crm\customer_detail.html:36
+msgid "Document upload functionality will be implemented here."
+msgstr "سيتم تنفيذ وظيفة تحميل المستندات هنا."
+
+#: .\templates\crm\customer_detail.html:44
+msgid "No documents uploaded yet."
+msgstr "لم يتم رفع أي مستندات بعد."
+
+#: .\templates\crm\customer_detail.html:53
+msgid "Booking History"
+msgstr "سجل الحجوزات"
+
+#: .\templates\crm\customer_detail.html:55
+msgid ""
+"Booking history will be displayed here once the bookings module is complete."
+msgstr "سيتم عرض سجل الحجوزات هنا بمجرد اكتمال وحدة الحجوزات."
+
+#: .\templates\crm\customer_detail.html:68
+msgid "Trigger"
+msgstr "المحفز"
+
+#: .\templates\crm\customer_detail.html:81
+msgid "No communication history."
+msgstr "لا يوجد سجل اتصالات."
+
+#: .\templates\crm\customer_form.html:17
+msgid "Save Changes"
+msgstr "حفظ التغييرات"
+
+#: .\templates\crm\customer_list.html:8
+msgid "Customer Management"
+msgstr "إدارة العملاء"
+
+#: .\templates\crm\customer_list.html:11
+msgid "Add New Customer"
+msgstr "إضافة عميل جديد"
+
+#: .\templates\crm\customer_list.html:20
+msgid "Search by name, phone, passport..."
+msgstr "ابحث بالاسم، الهاتف، جواز السفر..."
+
+#: .\templates\crm\customer_list.html:23
+msgid "Search"
+msgstr "بحث"
+
+#: .\templates\crm\customer_list.html:47
+msgid "View"
+msgstr "عرض"
+
+#: .\templates\crm\customer_list.html:52
+msgid "No customers found."
+msgstr "لم يتم العثور على عملاء."
+
+#: .\templates\crm\customer_list.html:63 .\templates\crm\customer_list.html:65
+msgid "Previous"
+msgstr "السابق"
+
+#: .\templates\crm\customer_list.html:71 .\templates\crm\customer_list.html:73
+msgid "Next"
+msgstr "التالي"
+
+#: .\templates\dashboards\accountant_dashboard.html:4
+#: .\templates\dashboards\accountant_dashboard.html:8
+msgid "Accountant Dashboard"
+msgstr "لوحة تحكم المحاسب"
+
+#: .\templates\dashboards\accountant_dashboard.html:17
+msgid "Collected Today"
+msgstr "المحصل اليوم"
+
+#: .\templates\dashboards\accountant_dashboard.html:30
+msgid "Bookings with Overdue Payments"
+msgstr "حجوزات ذات دفعات مستحقة"
+
+#: .\templates\dashboards\accountant_dashboard.html:43
+msgid "Expenses (This Month)"
+msgstr "المصاريف (هذا الشهر)"
+
+#: .\templates\dashboards\accountant_dashboard.html:55
+msgid "Recent Transactions"
+msgstr "المعاملات الأخيرة"
+
+#: .\templates\dashboards\accountant_dashboard.html:80
+msgid "View Booking"
+msgstr "عرض الحجز"
+
+#: .\templates\dashboards\accountant_dashboard.html:86
+msgid "No recent payments recorded."
+msgstr "لا توجد دفعات مسجلة حديثاً."
+
+#: .\templates\dashboards\agent_dashboard.html:4
+#: .\templates\dashboards\agent_dashboard.html:8
+msgid "Agent Dashboard"
+msgstr "لوحة تحكم الوكيل"
+
+#: .\templates\dashboards\agent_dashboard.html:20
+msgid "My Bookings (Today)"
+msgstr "حجوزاتي (اليوم)"
+
+#: .\templates\dashboards\agent_dashboard.html:33
+msgid "My Total Bookings"
+msgstr "إجمالي حجوزاتي"
+
+#: .\templates\dashboards\agent_dashboard.html:47
+msgid "My Bookings Pending Documents"
+msgstr "حجوزاتي بانتظار المستندات"
+
+#: .\templates\dashboards\agent_dashboard.html:58
+msgid "No bookings are pending documents. Great job!"
+msgstr "لا توجد حجوزات بانتظار المستندات. عمل رائع!"
+
+#: .\templates\dashboards\agent_dashboard.html:67
+msgid "My Bookings Pending Payment"
+msgstr "حجوزاتي بانتظار الدفع"
+
+#: .\templates\dashboards\agent_dashboard.html:78
+msgid "No bookings are pending payment."
+msgstr "لا توجد حجوزات بانتظار الدفع."
+
+#: .\templates\dashboards\manager_dashboard.html:4
+#: .\templates\dashboards\manager_dashboard.html:8
+msgid "Manager Dashboard"
+msgstr "لوحة تحكم المدير"
+
+#: .\templates\dashboards\manager_dashboard.html:17
+msgid "Revenue (This Month)"
+msgstr "الإيرادات (هذا الشهر)"
+
+#: .\templates\dashboards\manager_dashboard.html:30
+msgid "New Bookings (Month)"
+msgstr "الحجوزات الجديدة (شهري)"
+
+#: .\templates\dashboards\manager_dashboard.html:43
+msgid "Active Trips"
+msgstr "الرحلات النشطة"
+
+#: .\templates\dashboards\manager_dashboard.html:56
+msgid "Total Customers"
+msgstr "إجمالي العملاء"
+
+#: .\templates\dashboards\manager_dashboard.html:70
+msgid "Upcoming Trip Occupancy Rate"
+msgstr "نسبة إشغال الرحلات القادمة"
+
+#: .\templates\dashboards\manager_dashboard.html:82
+msgid "Recent Bookings"
+msgstr "الحجوزات الأخيرة"
+
+#: .\templates\dashboards\manager_dashboard.html:90
+msgid "ago"
+msgstr "منذ"
+
+#: .\templates\dashboards\manager_dashboard.html:93
+msgid "No recent bookings."
+msgstr "لا توجد حجوزات حديثة."
+
+#: .\templates\dashboards\manager_dashboard.html:115
+#, python-format
+msgid "%% Occupancy"
+msgstr "%% الإشغال"
+
+#: .\templates\landing_page.html:7
+msgid "Welcome to HajjUmrahFlow"
+msgstr "أهلاً بك في HajjUmrahFlow"
+
+#: .\templates\landing_page.html:18
+msgid ""
+"The integrated solution for managing Hajj and Umrah trips with efficiency "
+"and ease."
+msgstr "الحل المتكامل لإدارة رحلات الحج والعمرة بكفاءة وسهولة."
+
+#: .\templates\landing_page.html:20
+msgid "System Login"
+msgstr "تسجيل دخول للنظام"
+
+#: .\templates\login.html:7 .\templates\login.html:34
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: .\templates\partials\_navbar.html:11
+msgid "Language"
+msgstr "اللغة"
+
+#: .\templates\partials\_navbar.html:43
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: .\templates\partials\_sidebar.html:11
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+#: .\templates\partials\_sidebar.html:21 .\templates\trips\trip_list.html:4
+#: .\trips\models.py:94
+msgid "Trips"
+msgstr "الرحلات"
+
+#: .\templates\partials\_sidebar.html:32
+#: .\templates\reports\report_generation_page.html:4
+msgid "Reports"
+msgstr "التقارير"
+
+#: .\templates\partials\_svu_modal.html:8
+msgid "Project Information"
+msgstr "معلومات المشروع"
+
+#: .\templates\reports\pdf\manifest_template.html:16
+msgid "Passenger Manifest"
+msgstr "قائمة المسافرين"
+
+#: .\templates\reports\pdf\manifest_template.html:38
+msgid "No passengers found."
+msgstr "لم يتم العثور على مسافرين."
+
+#: .\templates\reports\profitability_report.html:4
+#: .\templates\reports\profitability_report.html:8
+msgid "Profitability Report"
+msgstr "تقرير الربحية"
+
+#: .\templates\reports\profitability_report.html:9
+msgid "Back to Reports"
+msgstr "العودة إلى التقارير"
+
+#: .\templates\reports\profitability_report.html:20
+msgid "Total Revenue (Collected)"
+msgstr "إجمالي الإيرادات (المحصلة)"
+
+#: .\templates\reports\profitability_report.html:24
+#: .\templates\trips\trip_detail.html:29
+msgid "Total Expenses"
+msgstr "إجمالي المصاريف"
+
+#: .\templates\reports\profitability_report.html:28
+#: .\templates\trips\trip_detail.html:37
+msgid "Net Profit"
+msgstr "صافي الربح"
+
+#: .\templates\reports\profitability_report.html:36
+msgid ""
+"Please select a trip from the reports dashboard to view its profitability."
+msgstr "يرجى اختيار رحلة من لوحة تحكم التقارير لعرض ربحيتها."
+
+#: .\templates\reports\report_generation_page.html:8
+msgid "Reporting Dashboard"
+msgstr "لوحة تحكم التقارير"
+
+#: .\templates\reports\report_generation_page.html:14
+msgid "Generate Passenger Manifest"
+msgstr "إنشاء قائمة المسافرين"
+
+#: .\templates\reports\report_generation_page.html:19
+#: .\templates\reports\report_generation_page.html:46
+msgid "Select Trip"
+msgstr "اختر رحلة"
+
+#: .\templates\reports\report_generation_page.html:26
+msgid "Format"
+msgstr "التنسيق"
+
+#: .\templates\reports\report_generation_page.html:36
+msgid "Generate Manifest"
+msgstr "إنشاء القائمة"
+
+#: .\templates\reports\report_generation_page.html:42
+msgid "View Trip Profitability"
+msgstr "عرض ربحية الرحلة"
+
+#: .\templates\reports\report_generation_page.html:52
+msgid "View Report"
+msgstr "عرض التقرير"
+
+#: .\templates\reports\report_generation_page.html:60
+msgid "Pending Payments"
+msgstr "الدفعات المعلقة"
+
+#: .\templates\reports\report_generation_page.html:66
+msgid "Balance"
+msgstr "الرصيد"
+
+#: .\templates\reports\report_generation_page.html:69
+msgid "No overdue payments found."
+msgstr "لم يتم العثور على دفعات مستحقة."
+
+#: .\templates\trips\trip_detail.html:11
+msgid "Edit Trip"
+msgstr "تعديل الرحلة"
+
+#: .\templates\trips\trip_detail.html:21
+msgid "Total Collected"
+msgstr "إجمالي المحصل"
+
+#: .\templates\trips\trip_detail.html:45
+msgid "Expected Revenue"
+msgstr "الإيرادات المتوقعة"
+
+#: .\templates\trips\trip_detail.html:53
+msgid "Registered Travelers"
+msgstr "المسافرون المسجلون"
+
+#: .\templates\trips\trip_detail.html:58
+msgid "Name"
+msgstr "الاسم"
+
+#: .\templates\trips\trip_detail.html:58
+msgid "Passport #"
+msgstr "رقم الجواز"
+
+#: .\templates\trips\trip_detail.html:58
+msgid "Booking Status"
+msgstr "حالة الحجز"
+
+#: .\templates\trips\trip_detail.html:71
+msgid "No travelers have been booked on this trip yet."
+msgstr "لم يتم حجز أي مسافرين في هذه الرحلة بعد."
+
+#: .\templates\trips\trip_detail.html:77
+msgid "Trip Expenses"
+msgstr "مصاريف الرحلة"
+
+#: .\templates\trips\trip_detail.html:81 .\trips\models.py:22
+#: .\trips\models.py:104
+msgid "Description"
+msgstr "الوصف"
+
+#: .\templates\trips\trip_detail.html:90
+msgid "No expenses recorded for this trip yet."
+msgstr "لم يتم تسجيل أي مصاريف لهذه الرحلة بعد."
+
+#: .\templates\trips\trip_form.html:17
+msgid "Save Trip"
+msgstr "حفظ الرحلة"
+
+#: .\templates\trips\trip_list.html:8
+msgid "Trip Management"
+msgstr "إدارة الرحلات"
+
+#: .\templates\trips\trip_list.html:12 .\trips\views.py:79
+msgid "Create New Trip"
+msgstr "إنشاء رحلة جديدة"
+
+#: .\templates\trips\trip_list.html:21
+msgid "All"
+msgstr "الكل"
+
+#: .\templates\trips\trip_list.html:32 .\trips\models.py:21
+msgid "Trip Name"
+msgstr "اسم الرحلة"
+
+#: .\templates\trips\trip_list.html:33 .\trips\models.py:23
+msgid "Departure Date"
+msgstr "تاريخ المغادرة"
+
+#: .\templates\trips\trip_list.html:35
+msgid "Occupancy"
+msgstr "الإشغال"
+
+#: .\templates\trips\trip_list.html:36
+msgid "Price"
+msgstr "السعر"
+
+#: .\templates\trips\trip_list.html:52
+msgid "No trips found for this status."
+msgstr "لم يتم العثور على رحلات بهذه الحالة."
+
+#: .\trips\apps.py:9
+msgid "Trips Management"
+msgstr "إدارة الرحلات"
+
+#: .\trips\models.py:16
+msgid "Scheduled"
+msgstr "مجدولة"
+
+#: .\trips\models.py:17
+msgid "Active"
+msgstr "نشطة"
+
+#: .\trips\models.py:18
+msgid "Completed"
+msgstr "مكتملة"
+
+#: .\trips\models.py:24
+msgid "Return Date"
+msgstr "تاريخ العودة"
+
+#: .\trips\models.py:25
+msgid "Total Seats"
+msgstr "إجمالي المقاعد"
+
+#: .\trips\models.py:26
+msgid "Price per Person"
+msgstr "السعر للشخص"
+
+#: .\trips\models.py:35
+msgid "Hotel Details"
+msgstr "تفاصيل الفندق"
+
+#: .\trips\models.py:36
+msgid "Flight Details"
+msgstr "تفاصيل الطيران"
+
+#: .\trips\models.py:88
+msgid "Return date must be after the departure date."
+msgstr "تاريخ العودة يجب أن يكون بعد تاريخ المغادرة."
+
+#: .\trips\models.py:90
+msgid "Total seats cannot be negative."
+msgstr "لا يمكن أن يكون إجمالي المقاعد سالبًا."
+
+#: .\trips\models.py:113
+msgid "Expense"
+msgstr "مصروف"
+
+#: .\trips\models.py:114
+msgid "Expenses"
+msgstr "المصاريف"
+
+#: .\trips\views.py:83
+msgid "Trip has been created successfully."
+msgstr "تم إنشاء الرحلة بنجاح."
+
+#: .\trips\views.py:99
+msgid "Update Trip"
+msgstr "تحديث الرحلة"
+
+#: .\trips\views.py:103
+msgid "Trip has been updated successfully."
+msgstr "تم تحديث الرحلة بنجاح."
+
+#: .\users\apps.py:9
+msgid "User Management"
+msgstr "إدارة المستخدمين"
+
+#: .\users\models.py:13
+msgid "Manager"
+msgstr "مدير"
+
+#: .\users\models.py:14
+msgid "Agent"
+msgstr "وكيل"
+
+#: .\users\models.py:15
+msgid "Accountant"
+msgstr "محاسب"
+
+#: .\users\models.py:18
+msgid "email address"
+msgstr "البريد الإلكتروني"
+
+#: .\users\models.py:22
+msgid "role"
+msgstr "الدور"
+
+#: .\users\models.py:26
+msgid "Designates the user's role within the system."
+msgstr "يحدد دور المستخدم داخل النظام."
+
+#: .\users\models.py:33
+msgid "groups"
+msgstr "المجموعات"
+
+#: .\users\models.py:36
+msgid ""
+"The groups this user belongs to. A user will get all permissions granted to "
+"each of their groups."
+msgstr "المجموعات التي ينتمي إليها هذا المستخدم. سيحصل المستخدم على جميع الأذونات الممنوحة لكل مجموعة من مجموعاته."
+
+#: .\users\models.py:44
+msgid "user permissions"
+msgstr "أذونات المستخدم"
+
+#: .\users\models.py:46
+msgid "Specific permissions for this user."
+msgstr "أذونات محددة لهذا المستخدم."

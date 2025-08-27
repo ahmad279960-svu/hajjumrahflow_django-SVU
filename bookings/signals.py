@@ -1,7 +1,6 @@
 # bookings/signals.py
 
 import requests
-import os
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
@@ -29,7 +28,7 @@ def trigger_new_booking_workflow(sender, instance, created, **kwargs):
     This fulfills requirement 004-FR-BOK.
     """
     if created: # Only trigger on creation
-        webhook_url = os.getenv('N8N_NEW_BOOKING_WEBHOOK_URL')
+        webhook_url = settings.N8N_NEW_BOOKING_WEBHOOK_URL
         if not webhook_url:
             if settings.DEBUG:
                 print("WARNING: N8N_NEW_BOOKING_WEBHOOK_URL is not set. Skipping webhook.")
@@ -42,10 +41,12 @@ def trigger_new_booking_workflow(sender, instance, created, **kwargs):
         }
         
         try:
+            # Use a timeout to prevent blocking the main thread for too long.
             response = requests.post(webhook_url, json=payload, timeout=5)
             log_webhook_attempt(webhook_url, payload, response)
         except requests.exceptions.RequestException as e:
             log_webhook_attempt(webhook_url, payload, None)
+            # In a production environment, this error should be sent to a proper logging service.
             print(f"ERROR: Webhook request failed: {e}")
 
 @receiver(post_save, sender=Payment)
@@ -66,7 +67,7 @@ def handle_new_payment(sender, instance, created, **kwargs):
 
     # 2. Trigger Receipt Webhook (only on creation)
     if created:
-        webhook_url = os.getenv('N8N_PAYMENT_RECEIPT_WEBHOOK_URL')
+        webhook_url = settings.N8N_PAYMENT_RECEIPT_WEBHOOK_URL
         if not webhook_url:
             if settings.DEBUG:
                 print("WARNING: N8N_PAYMENT_RECEIPT_WEBHOOK_URL is not set. Skipping webhook.")

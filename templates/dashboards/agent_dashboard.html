@@ -18,7 +18,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{% trans "My Bookings (Today)" %}</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ my_new_bookings_today }}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ my_bookings_today }}</div>
                     </div>
                     <div class="col-auto"><i class="fas fa-calendar-day fa-2x text-gray-300"></i></div>
                 </div>
@@ -26,17 +26,61 @@
         </div>
     </div>
     <div class="col-md-6 mb-4">
-        <div class="card h-100 border-left-warning">
+        <div class="card h-100 border-left-primary">
             <div class="card-body">
                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">{% trans "Pending Documents" %}</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending_documents_count }}</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{% trans "My Total Bookings" %}</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ my_total_bookings }}</div>
                     </div>
-                    <div class="col-auto"><i class="fas fa-folder-open fa-2x text-gray-300"></i></div>
+                    <div class="col-auto"><i class="fas fa-file-invoice fa-2x text-gray-300"></i></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-warning"><i class="fas fa-folder-open me-2"></i>{% trans "My Bookings Pending Documents" %}</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for booking in pending_docs_bookings %}
+                    <a href="{% url 'bookings:booking-detail' booking.pk %}" class="list-group-item list-group-item-action">
+                        <strong>{{ booking.customer.full_name }}</strong>
+                        <br>
+                        <small class="text-muted">{{ booking.trip.name }}</small>
+                    </a>
+                    {% empty %}
+                    <li class="list-group-item">{% trans "No bookings are pending documents. Great job!" %}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-danger"><i class="fas fa-money-bill-wave me-2"></i>{% trans "My Bookings Pending Payment" %}</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for booking in pending_payment_bookings %}
+                    <a href="{% url 'bookings:booking-detail' booking.pk %}" class="list-group-item list-group-item-action">
+                        <strong>{{ booking.customer.full_name }}</strong> ({{ booking.balance_due }})
+                        <br>
+                        <small class="text-muted">{{ booking.trip.name }}</small>
+                    </a>
+                    {% empty %}
+                    <li class="list-group-item">{% trans "No bookings are pending payment." %}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

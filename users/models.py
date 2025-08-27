@@ -26,5 +26,27 @@ class CustomUser(AbstractUser):
         help_text=_('Designates the user\'s role within the system.')
     )
 
+    # FIX: Added unique related_name to resolve system check errors (E304).
+    # This prevents clashes with the default auth.User model's reverse accessors.
+    groups = models.ManyToManyField(
+        'auth.Group',
+        verbose_name=_('groups'),
+        blank=True,
+        help_text=_(
+            'The groups this user belongs to. A user will get all permissions '
+            'granted to each of their groups.'
+        ),
+        related_name="customuser_set",  # Unique related_name
+        related_query_name="user",
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        verbose_name=_('user permissions'),
+        blank=True,
+        help_text=_('Specific permissions for this user.'),
+        related_name="customuser_set",  # Unique related_name
+        related_query_name="user",
+    )
+
     def __str__(self):
         return self.username

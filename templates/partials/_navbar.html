@@ -4,26 +4,47 @@
         <button class="btn btn-primary d-md-none" id="sidebar-toggle">
             <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user me-1"></i>
-                        {{ request.user.username }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+        <div class="ms-auto d-flex align-items-center">
+            <div class="dropdown me-3">
+                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-globe"></i> {% trans "Language" %}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% for lang_code, lang_name in LANGUAGES %}
                         <li>
-                            {# Use a form for logout to ensure a POST request for security #}
-                            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                            <form action="{% url 'set_language' %}" method="post" class="d-inline">
                                 {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                                <input name="language" type="hidden" value="{{ lang_code }}">
+                                <button type="submit" class="dropdown-item {% if lang_code == LANGUAGE_CODE %}active{% endif %}">
+                                    {{ lang_name }}
+                                </button>
                             </form>
-                            <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">
-                                {% trans "Logout" %}
-                            </a>
                         </li>
-                    </ul>
-                </li>
-            </ul>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user me-1"></i>
+                    {{ request.user.username }}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                        <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                            {% csrf_token %}
+                        </form>
+                        <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
+                            {% trans "Logout" %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
