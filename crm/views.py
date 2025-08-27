@@ -54,12 +54,8 @@ class CustomerDetailView(LoginRequiredMixin, DetailView):
     template_name = 'crm/customer_detail.html'
     context_object_name = 'customer'
     
-    # In a real implementation, we would add the related objects
-    # to the context here if more complex queries were needed.
-    # For now, the template can access them directly via the customer object.
 
-
-class CustomerCreateView(LoginRequireduin, CreateView):
+class CustomerCreateView(LoginRequiredMixin, CreateView):
     """
     Handles the creation of a new customer record using the CustomerForm.
     """

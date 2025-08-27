@@ -1,7 +1,8 @@
 # bookings/forms.py
 
 from django import forms
-from .models import Booking, Payment, Trip
+from .models import Booking, Payment
+from trips.models import Trip # Correctly imported from the 'trips' app
 
 class BookingForm(forms.ModelForm):
     """

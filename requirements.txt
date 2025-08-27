@@ -18,6 +18,7 @@ WeasyPrint
 
 # Utilities
 django-htmx
+requests
 
 # Development & Code Quality
 black

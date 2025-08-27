@@ -8,8 +8,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 
-from .models import Booking, Payment, Trip, Customer
-from .forms import PaymentForm, BookingForm
+# Corrected imports from their respective apps
+from .models import Booking, Payment
+from .forms import PaymentForm
+from trips.models import Trip
+from crm.models import Customer
 
 class BookingListView(LoginRequiredMixin, ListView):
     """
