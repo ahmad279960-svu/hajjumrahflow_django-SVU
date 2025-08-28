@@ -11,6 +11,7 @@ from .views.dashboard_views import DashboardView
 from .views.public_views import LandingPageView
 
 # These patterns will not be prefixed with language code
+# FIX: Moved the AI assistant URL pattern here, with other APIs
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include([
@@ -18,12 +19,13 @@ urlpatterns = [
         path('crm/', include('crm.api.urls')),
         path('trips/', include('trips.api.urls')),
         path('bookings/', include('bookings.api.urls')),
+        path('ai/', include('ai_assistant.urls', namespace='ai_assistant')), # Correct location
     ])),
     path('api/v1/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/v1/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/v1/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    path('i18n/', include('django.conf.urls.i18n')), # Language switcher URL
-    path('logout/', CustomLogoutView.as_view(), name='logout'), # Moved for consistency
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
 ]
 
 # These patterns will be prefixed with the language code (e.g., /ar/dashboard/)

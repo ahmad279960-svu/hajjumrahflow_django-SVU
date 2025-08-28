@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <div class="card mb-4">
+        <div class="card mb-4 no-animation">
             <div class="card-header">{% trans "Generate Passenger Manifest" %}</div>
             <div class="card-body">
                 <form action="{% url 'reports:generate-manifest' %}" method="post">
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="card mb-4">
+        <div class="card mb-4 no-animation">
             <div class="card-header">{% trans "View Trip Profitability" %}</div>
             <div class="card-body">
                 <form action="{% url 'reports:trip-profitability' %}" method="get">
@@ -56,7 +56,7 @@
     </div>
 
     <div class="col-md-6">
-        <div class="card">
+        <div class="card no-animation">
             <div class="card-header">{% trans "Pending Payments" %}</div>
             <div class="card-body">
                 <ul class="list-group">

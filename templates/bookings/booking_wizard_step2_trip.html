@@ -7,16 +7,13 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">{% trans "New Booking - Step 2: Select a Trip" %}</h1>
 </div>
-<form method="post">
+<form id="booking-step2-form" method="post" action="{% url 'bookings:booking-create-step' step=2 %}">
     {% csrf_token %}
     <div class="card">
         <div class="card-body">
             <div class="mb-3">
-                <label for="trip_id" class="form-label">{% trans "Trip" %}</label>
-                <select name="trip_id" id="trip_id" class="form-select" required
-                        hx-get="{% url 'bookings:check-seat-availability' %}"
-                        hx-trigger="change"
-                        hx-target="#seat-availability-info">
+                <label for="trip-select" class="form-label">{% trans "Trip" %}</label>
+                <select name="trip_id" id="trip-select" class="form-select" required>
                     <option value="">{% trans "--- Select a Trip ---" %}</option>
                     {% for trip in trips %}
                     <option value="{{ trip.id }}">{{ trip.name }} - {{ trip.departure_date|date:"Y-m-d" }}</option>
@@ -24,11 +21,77 @@
                 </select>
             </div>
 
-            <div id="seat-availability-info">
-                {% include "bookings/htmx/check_seat_availability.html" %}
+            <div id="availability-result" class="mt-3">
+                <div class="alert alert-info py-2">{% trans "Please select a trip to check seat availability." %}</div>
             </div>
 
+            <button id="next-button" type="submit" class="btn btn-primary mt-3" disabled>{% trans "Next: Confirm Details" %}</button>
         </div>
     </div>
 </form>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tripSelect = document.getElementById('trip-select');
+    const resultContainer = document.getElementById('availability-result');
+    const nextButton = document.getElementById('next-button');
+    const checkUrl = "{% url 'bookings:check-seat-availability' %}";
+
+    let currentRequest = null; // To handle rapid changes
+
+    tripSelect.addEventListener('change', function() {
+        const tripId = this.value;
+
+        // Abort any previous ongoing request
+        if (currentRequest) {
+            currentRequest.abort();
+        }
+
+        // Reset state
+        nextButton.disabled = true;
+        resultContainer.innerHTML = `
+            <div class="d-flex align-items-center">
+                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                <span>{% trans "Checking availability..." %}</span>
+            </div>`;
+
+        if (!tripId) {
+            resultContainer.innerHTML = '<div class="alert alert-info py-2">{% trans "Please select a trip to check seat availability." %}</div>';
+            return;
+        }
+
+        // Create a new request
+        const controller = new AbortController();
+        currentRequest = controller;
+
+        fetch(`${checkUrl}?trip_id=${tripId}`, { signal: controller.signal })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.seats_available) {
+                    resultContainer.innerHTML = '<div class="alert alert-success py-2">{% trans "Seats are available!" %}</div>';
+                    nextButton.disabled = false;
+                } else {
+                    resultContainer.innerHTML = '<div class="alert alert-danger py-2">{% trans "Sorry, no seats are available for this trip." %}</div>';
+                }
+            })
+            .catch(error => {
+                if (error.name === 'AbortError') {
+                    console.log('Fetch aborted');
+                } else {
+                    resultContainer.innerHTML = '<div class="alert alert-danger py-2">{% trans "Error checking availability. Please try again." %}</div>';
+                }
+            })
+            .finally(() => {
+                currentRequest = null;
+            });
+    });
+});
+</script>
 {% endblock %}

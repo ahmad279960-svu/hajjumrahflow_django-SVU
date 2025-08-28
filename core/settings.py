@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'trips.apps.TripsConfig',
     'bookings.apps.BookingsConfig',
     'reports.apps.ReportsConfig',
+    'ai_assistant.apps.AiAssistantConfig', # New AI Assistant app
 ]
 
 MIDDLEWARE = [
@@ -166,3 +167,6 @@ LOGOUT_REDIRECT_URL = 'landing-page'
 # Centralized n8n Webhook URLs
 N8N_NEW_BOOKING_WEBHOOK_URL = os.getenv('N8N_NEW_BOOKING_WEBHOOK_URL')
 N8N_PAYMENT_RECEIPT_WEBHOOK_URL = os.getenv('N8N_PAYMENT_RECEIPT_WEBHOOK_URL')
+
+# AI Assistant Settings
+OPENROUTER_API_KEY = os.getenv('OPENROUTER_API_KEY')

@@ -1,14 +1,20 @@
 {% load i18n %}
 
-{% if trip_selected %}
-    {% if seats_available %}
-        <div class="alert alert-success">{% trans "Seats are available!" %}</div>
-        <button type="submit" class="btn btn-primary">{% trans "Next: Confirm Details" %}</button>
+<div class="mt-3">
+    {% if trip_selected %}
+        {% if seats_available %}
+            <div class="alert alert-success py-2">{% trans "Seats are available!" %}</div>
+            <form method="post" action="{% url 'bookings:booking-create-step' step=2 %}">
+                {% csrf_token %}
+                <input type="hidden" name="trip_id" value="{{ request.GET.trip_id }}">
+                <button type="submit" class="btn btn-primary">{% trans "Next: Confirm Details" %}</button>
+            </form>
+        {% else %}
+            <div class="alert alert-danger py-2">{% trans "Sorry, no seats are available for this trip." %}</div>
+            <button type="button" class="btn btn-primary" disabled>{% trans "Next: Confirm Details" %}</button>
+        {% endif %}
     {% else %}
-        <div class="alert alert-danger">{% trans "Sorry, no seats are available for this trip." %}</div>
-        <button type="submit" class="btn btn-primary" disabled>{% trans "Next: Confirm Details" %}</button>
+        <div class="alert alert-info py-2">{% trans "Please select a trip to check seat availability." %}</div>
+        <button type="button" class="btn btn-primary" disabled>{% trans "Next: Confirm Details" %}</button>
     {% endif %}
-{% else %}
-    <div class="alert alert-info">{% trans "Please select a trip to check seat availability." %}</div>
-    <button type="submit" class="btn btn-primary" disabled>{% trans "Next: Confirm Details" %}</button>
-{% endif %}
+</div>

@@ -3,13 +3,12 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, FormView
-from django.views.generic.base import TemplateView, View
+from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
-from django.http import HttpResponse
+from django.http import JsonResponse
 
-# Corrected imports from their respective apps
 from .models import Booking, Payment
 from .forms import PaymentForm
 from trips.models import Trip
@@ -26,7 +25,6 @@ class BookingListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        # Add filtering logic here if needed, e.g., by trip or status
         return queryset.select_related('customer', 'trip')
 
 
@@ -50,7 +48,7 @@ class AddPaymentView(LoginRequiredMixin, FormView):
     Handles the submission of the payment form.
     """
     form_class = PaymentForm
-    http_method_names = ['post'] # This view only accepts POST requests
+    http_method_names = ['post']
 
     def form_valid(self, form):
         booking = get_object_or_404(Booking, pk=self.kwargs.get('booking_pk'))
@@ -71,12 +69,14 @@ class BookingCreateWizardView(LoginRequiredMixin, View):
     """
     A view that orchestrates the multi-step booking creation wizard.
     It uses the session to store data between steps.
-    This version is corrected to properly handle template rendering.
     """
     def get(self, request, *args, **kwargs):
         step = kwargs.get('step', 1)
 
         if step == 1:
+            # Clear any previous wizard data from the session
+            request.session.pop('booking_wizard_customer_id', None)
+            request.session.pop('booking_wizard_trip_id', None)
             template_name = 'bookings/booking_wizard_step1_customer.html'
             context = {'customers': Customer.objects.all()}
         elif step == 2:
@@ -136,16 +136,20 @@ class BookingCreateWizardView(LoginRequiredMixin, View):
 
 class CheckSeatAvailabilityView(LoginRequiredMixin, View):
     """
-    An HTMX-powered view to check for available seats on a trip in real-time.
-    This fulfills requirement 002-FR-BOK.
+    An HTMX-powered view that checks for available seats on a trip.
+    FIX: This view now returns a JSON response, which is more robust for JavaScript to handle.
     """
     def get(self, request, *args, **kwargs):
         trip_id = request.GET.get('trip_id')
-        context = {'trip_selected': False}
-        if trip_id:
-            trip = get_object_or_404(Trip, pk=trip_id)
-            context['seats_available'] = trip.available_seats > 0
-            context['trip_selected'] = True
+        if not trip_id:
+            return JsonResponse({'error': 'No trip_id provided'}, status=400)
         
-        # This is a partial template, so we render it directly
-        return render(request, 'bookings/htmx/check_seat_availability.html', context)
+        try:
+            trip = Trip.objects.get(pk=trip_id)
+            seats_available = trip.available_seats > 0
+            return JsonResponse({
+                'trip_id': trip.id,
+                'seats_available': seats_available
+            })
+        except (Trip.DoesNotExist, ValueError, TypeError):
+            return JsonResponse({'error': 'Invalid trip_id'}, status=404)
